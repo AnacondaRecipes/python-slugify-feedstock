@@ -20,7 +20,7 @@ build:
     - slugify = slugify.cli:main
 
 requirements:
-  build:
+  host:
     - python
     - setuptools
 
