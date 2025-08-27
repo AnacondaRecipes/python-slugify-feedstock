@@ -1,28 +1,33 @@
 {% set name = "python-slugify" %}
-{% set version = "5.0.2" %}
+{% set version = "8.0.4" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: f13383a0b9fcbe649a1892b9c8eb4f8eab1d6d84b84bb7a624317afa98159cab
+  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    sha256: 59202371d1d05b54a9e7720c5e038f928f45daaffe41dd10822f3907b937c856
+  - url: https://github.com/un33k/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+    sha256: 09c8faf36b5703d0d9492ca68af71f09bd3d7d9e6761bf945ae261788fbebeeb
+    folder: gh
 
 build:
-  noarch: python
   number: 0
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   entry_points:
     - slugify=slugify.__main__:main
+  skip: true  # [py<37]
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python
+    - setuptools
   run:
-    - python >=3.6
+    - python
     - text-unidecode >=1.3
+  run_constrained:
     - unidecode >=1.1.1
 
 test:
@@ -31,11 +36,12 @@ test:
   imports:
     - slugify
   source_files:
-    - test.py
+    - gh/test.py
   commands:
-    - python -m pip check
+    - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
     - slugify --help
-    - python test.py
+    - python -m unittest -v gh/test.py
 
 about:
   home: https://github.com/un33k/python-slugify
@@ -43,7 +49,9 @@ about:
   license_family: MIT
   license_file: LICENSE
   summary: A Python Slugify application that handles Unicode
+  description: A Python slugify application that handles unicode.
   dev_url: https://github.com/un33k/python-slugify
+  doc_url: https://github.com/un33k/python-slugify/blob/master/README.md
 
 extra:
   recipe-maintainers:
