@@ -1,15 +1,15 @@
 {% set name = "python-slugify" %}
-{% set version = "8.0.4" %}
+{% set version = "9.1.0" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-    sha256: 59202371d1d05b54a9e7720c5e038f928f45daaffe41dd10822f3907b937c856
+  - url: https://pypi.org/packages/source/p/python-slugify/python_slugify-9.1.0.tar.gz
+    sha256: 3f02e8a0639c61e37eca5a783aae09112796d15d331ee3d5372241b61ee05f1c
   - url: https://github.com/un33k/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: 09c8faf36b5703d0d9492ca68af71f09bd3d7d9e6761bf945ae261788fbebeeb
+    sha256: 0a14bf38e44e26af1e1fb76c00818bb89446261187791d061d6d70d0eae2c244
     folder: gh
 
 build:
