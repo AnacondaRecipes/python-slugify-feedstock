@@ -1,5 +1,5 @@
 {% set name = "python-slugify" %}
-{% set version = "9.1.0" %}
+{% set version = "9.1.3" %}
 
 package:
   name: {{ name }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name|replace("-", "_") }}/{{ name|replace("-", "_") }}-{{ version }}.tar.gz
-  sha256: 3f02e8a0639c61e37eca5a783aae09112796d15d331ee3d5372241b61ee05f1c
+  sha256: 90e997f2e0987239ce95e12f700086eb18e1d1d3ee22624fbbdbd095afca42b6
 
 build:
   number: 0
@@ -25,7 +25,7 @@ requirements:
     - python
     - text-unidecode >=1.3
   run_constrained:
-    - unidecode >=1.1.1
+    - Unidecode >=1.1.1
     - anyascii >=0.3.2
 
 test:
